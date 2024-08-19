@@ -1,0 +1,406 @@
+"Memory Lane" by Siddarth Maddhula and Joshua Levin
+
+[Packages]
+Include Basic Screen Effects by Emily Short
+
+The player has a number called max hit points.
+The player has a number called current hit points.
+
+The max hit points of the player is 100.
+The current hit points of the player is 100.
+
+Venom is a number variable. Venom is initially 0.
+
+Status is an action applying to nothing. Understand "status" as status.
+Check status:
+	say "Current HP: [current hit points of the player][line break]".
+
+		
+
+Use is an action applying to one thing. Understand "use [something]" as Use.
+Check use:
+	if the noun is Venom Antidote:
+		Now venom is 0;
+		Say "'Whoa. I feel a LOT better now.'[line break][italic type]You're telling me.[roman type]";
+	otherwise:
+		Say "[italic type]Use it for what exactly?[roman type]"
+
+
+Dungeon is a room. The description of Dungeon is "You wake up to discover yourself in what seems to be an old-timey fantasy dungeon room."
+
+A chained doberman, a gothic closet, and a computer are in the dungeon. 
+
+The doberman is a thing in the dungeon. The description is "The dog appears to be fixed to the wall of the room with a chain." It is fixed in place.
+
+There is a container called the hole in the wall in the dungeon. The hole in the wall is undescribed. It is fixed in place.
+
+The bronze key is a thing in the hole in the wall. The description is "Use this to unlock a door."
+
+The red door is a door. The red Door is north of the Dungeon and south of the Classroom. The red Door is locked. The red door is closed. 
+
+The bronze key unlocks the red Door.
+
+Before examining bronze key once:
+	say "[italic type]Oh my god, this is our ticket out of here! Let's go![roman type]"
+
+After dropping the small cheese:
+	if doberman is described:
+		now the key is in the Dungeon;
+		now the small cheese is undescribed;
+		now the doberman is undescribed;
+		say "The doberman appears to have broken the chain attachment from the wall and created a hole. There appears to be something glinting in there. It then drops out down to the floor.[line break]c l i n k[line break]    c l i n k[line break][italic type]Is that what I think it is? [roman type][line break]";
+
+After dropping the large cheese:
+	if doberman is described:
+		now the key is in the Dungeon;
+		now the large cheese is undescribed;
+		now the doberman is undescribed;
+		say "The doberman appears to have broken the chain attachment from the wall and created a hole. But ... but! The cheese is so enticing. It's ... it's running, nay, charging towards you! Still going, still going, going for a jump, NO!....";
+		wait for any key;
+		say "[line break]The dog accidentally collides with you head-on and knocks you to the floor. You lose 30 HP as a result, and the cheese appears to be gone as well to boot.";
+		decrease the current hit points of the player by 30; 
+		wait for any key;
+		say "[line break][italic type]OOOOOFF![roman type]";
+		wait for any key;
+		say "[line break]Bringing your attention back to the hole in the wall, there appears to be something glinting from there. It then drops out down to the floor.[line break]c l i n k[line break]    c l i n k[line break][italic type]Is that what I think it is? [roman type][line break]";
+
+The gothic closet is opaque. The gothic closet is a closed, openable container. It is fixed in place
+
+The shovel is a thing in the gothic closet. The description is "Use this to dig." The shovel unlocks Plot #1, Plot #2, Plot #3, Plot #4, Plot #5, and Plot #6. It is portable.
+
+Before examining shovel once: 
+	say "[italic type]You never know when you'll need a shovel, at least from my experience. Probably best to take it for now. [roman type][line break]";
+
+
+
+
+There is a small cheese piece in the gothic closet. It is edible. The description is "Eat this to recover 30 HP." It is portable.
+
+After eating the small cheese piece:
+	increase the current hit points of the player by 30;
+	
+There is a large cheese piece in the gothic closet. It is edible. The description is "Eat this to recover 70 HP." It is portable.
+
+After eating the large cheese piece:
+	increase the current hit points of the player by 70.
+
+A paper message is a thing in the gothic closet. The description is "It reads, 'One of the things in here is for the dog.'" It is portable.
+
+The computer is a device. The computer is switched off. The initial appearance is "[if switched off]In the corner of the room, on a table, lies an ancient looking computer. The screen is blank." It is fixed in place.
+
+Before examining switched on computer once:
+	say "[italic type]There we go... Oh wait wait wait, I know this! I used to play this all the time back in the day. Zork! Can we go any further?[roman type][line break]";
+	say "[bracket] c l i c k i n g   r a n d o m   k e y s [close bracket][line break]";
+	say "[italic type]Sigh. Guess I shoulda expected that.[roman type][line break]";
+
+After examining switched on computer more than once:
+	say "[if switched on]The screen is lit up. The voice in your head says it's the title screen to what you assume to be an old ... [bracket]REDACTED[close bracket] ... called Zork."
+	
+
+The wait counter is a number variable. The wait counter is initially 0.
+Gr is a number variable. Gr is initially 0.
+Every turn:
+	if venom is 1 and the player's command does not match "status":
+		decrease the current hit points of the player by 10; 
+		say "- 1 0   H P";
+	if the current hit points of the player is greater than 100:
+		now the current hit points of the player is 100;
+	if the player's command matches "wait":
+		increment the wait counter;
+	otherwise:
+		Now the wait counter is 0;
+	if the wait counter is 3:
+	 	say "[italic type]Yeah, I didn[’]t want to get out of here either.[roman type]";
+	if the wait counter is 6:
+		say "[italic type]No, for real. Get moving![roman type]";
+	if the current hit points of the player are less than 1:
+		say "[bold type]Unfortunately, it appears that your story has ended. Poor, poor, test subject indeed. Well, we[']ll just have to try harder next time, won[']t we?[roman type][line break]'Wh-wh-what..?'[line break]You collapse before you can get the rest of your words out.[roman type]";
+		end the story saying "GAME OVER";
+	if the orange switch is switched on and the yellow switch is switched off and the green switch is switched on and the blue switch is switched on and Gr is 0:
+		Now the green door is unlocked;
+		Now Gr is one;
+		say "[line break]c l i c k -[line break]...[line break][italic type]WOOHOOOOOOO! ALRIGHT, ALRIGHT! LET'S GOOOOO!!!!!!![roman type][line break]'You sure seem happy.'[line break][italic type]And you're not? Really?[roman type][line break]'Okaaay, you got me.'[line break][italic type]Theeeee'res the spirit![roman type]".
+		
+		
+
+
+Opening1 is a scene. Opening1 begins when play begins.
+
+When Opening1 begins:
+	say "[bold type]Welcome to the headquarters of K.H. Lambert, a family company. We’re sure you’re excited to get out of here, but you may not find it to be as easy as you expect. Try getting up first, if you can.[roman type]";
+	wait for any key;
+	say "[line break][line break]Surprise sets in as you perceive the booming, taunting announcement. 
+	But not because of the words themselves. You couldn't care less about that. Surveying the room, it comes as a shock to discover your right hand is chained, and not just chained to anything, but a bed specifically. 
+	You try to remember whether you've ever been in a situation like this before so you can tell whether or not you're supposed to feel afraid, angry, anything from your current situation. You try, until it slowly dawns on you that there is nothing to remember.";
+	wait for any key;
+	say "[line break]...";
+	wait for any key;
+	say "[italic type]This is a bit of a pickle, isn't it? Bonafide amnesia case, huh.[roman type]";
+	wait for any key;
+	say "[line break]'Who the hell was that?'";
+	wait for any key;
+	say "[italic type]Easy, easy, pal. Same situation as you. I promise, hand to God.[roman type]";
+	wait for any key;
+	say "[line break]'I dunno, man. Last I checked you're supposed to be able to see people you talk to, or at least kinda tell where they are.'";
+	wait for any key;
+	say "[italic type]You tellin['] me you actually know how talkin's supposed to work? Now [bold type]that[italic type] I find hard to believe. Let's focus on getting out of here first, huh?[roman type]";
+	wait for any key;
+	say "[line break][line break]You try standing up, and find that the simple motion breaks the chain without much effort. A little surprised by this, you take a moment to collect your thoughts and survey the area around you.";
+	wait for any key;
+	say "[line break][bracket]initial instructions: type 'status' in order to get current HP (max 100)[close bracket]";
+	wait for any key;
+	say "[line break]".
+
+
+[Classroom code]
+The Classroom is a room. The description of the Classroom is "A dusty classroom mysteriously linked to a dungeon."
+Before going to the Classroom for the first time:
+	say "As you sprint through the door, you breathe a sigh of relief as your dungeon filled days are at an end. You gather yourself and soak in your immediate surroundings. The room is both dusty yet orderly. Rays of sunlight beam through the windows aligned on one side of the wall. Mid afternoon, you think to yourself. Small,brown, broken down chairs and worn, but usable, desks are perfectly lined up in an orderly fashion. You see a sleek, black chalkboard with a large desk in front of it on the opposite side of the room. A classroom? Your sense of relief is swiftly overshadowed by confusion and slight sense of panic.	
+
+[italic type]This classroom… surely it’s not-[roman type]
+
+'[bold type]Well done escaping from Brutus’ play pen,' [roman type] the mysterious voice you heard earlier is now talking from the speakers nestled in the upper corners of the room. [bold type] 'I[']m sure you have a lot of questions, but maybe you should start by answering the ones in this room. Good luck, A-(voice distorts incomprehensibly).'[roman type]."
+
+[items]
+[the chalkboard]
+The chalkboard is a fixed in place thing in the Classroom.  The chalkboard can be clean or dirty. The chalkboard is dirty. The description of the chalkboard is "[if dirty]A clean chalkboard, eerily devoid of any imperfections. So much so, that you can[']t ignore it in this musty, rundown room.[end if] [if clean]You see text written in chalk vertically aligned perfectly reading: [line break]
+
+1) 2 + 3 = 8[line break]
+2) 4 + 4 = 20[line break]
+3) 5 + 10 = 55[line break]
+4) 2 + 5 = ? [line break][end if]."		
+
+[the broom]
+The broom is a thing in the Classroom. The description of the broom is "A broom in a similar condition as the room, dusty and dirty."
+[Clean is an action applying to one thing. Understand "clean [something]" as Clean.
+Check clean something:
+	If the player is not carrying the broom, say "That might be easier if I find a tool to clean with." instead;
+	if the noun is not the classroom, say "I'd rather not." instead;
+Instead of clean the classroom:
+	now the description of the classroom is "A much cleaner classroom than when you originally found it." instead;
+	say "[bold type]'As meticulous as ever I see, but are you sure you need to do that?'[roman type] the voice says as he laughs."]
+	
+[the eraser]
+The eraser is a closed, openable, lockable, locked, portable, opaque container in the Classroom. The description of the eraser is "Your typical chalkboard eraser." Rule for printing the name of the closed eraser while taking inventory: say "[printed name of the item described]"; omit contents in listing. Rule for printing room description details of the closed eraser: stop.
+
+[erasing the chalkboard]
+Erase is an action applying to one thing. Understand "erase [something]" as Erase. 
+Check erase something:
+	If the player is not carrying the eraser, say "You need an eraser to do that." instead; 
+	if the noun is not a chalkboard, say "You can't erase that." instead; 
+	if the noun is a chalkboard:
+		now the chalkboard is clean;
+		now the eraser is unlocked;
+		now the eraser is transparent;
+		say "You feel goofy for erasing an empty chalkboard, but to your surprise, you see white, chalky text being uncovered from beneath the dark chalkboard as you wipe the board with the eraser. You continue to 'erase' as much of the chalkboard as you can to uncover equations vertically aligned that read: [line break]
+	1) 2 + 3 = 8[line break]
+	2) 4 + 4 = 20[line break]
+	3) 5 + 10 = 55[line break]
+	4) 2 + 5 = ?[line break]";
+		say "[line break]As you were erasing, you also felt some rattling from the eraser."
+
+[the chalk]
+The chalk is a thing in the eraser. The description is "You wonder how you didn't notice it before."
+	
+[desk labeled 12]
+The desk labeled 12 is a fixed in place, closed, openable container. Understand "desk" as the desk labeled 12. The description of the desk 12 is "A desk with some storage space and the number 12 written on it in large red letters. It triggers a weird feeling in your head. Or, at least you think it's your head." Rule for printing the name of the closed desk labeled 12 while taking inventory: say "[printed name of the item described]"; omit contents in listing. Rule for printing room description details of the closed desk labeled 12: stop.
+
+After opening the desk labeled 12 for the first time:
+	say "You find [a list of things in the desk labeled 12].";
+	say "[italic type]I KNEW IT! That’s my notebook from when I went to PalColy High! It’s even in my old spot… number 12…".
+
+[writing on the board]
+Writing a number is an action applying to one number and one thing. Understand "write [a number] on [thing]" as writing a number.
+Check writing a number:
+	If the second noun is not a chalkboard, say "You shouldn't write on that." instead;
+	if the number understood is not 12, say "Nothing of interest happens. Maybe I should try writing something else." instead;
+	otherwise:
+		Now the desk labeled 12 is in the classroom;
+		say "[bold type]'Your problem solving skills have gotten better since I last saw you.' [line break][roman type]For some reason, that sentence sends a powerful chill through your spine.[line break]"
+		
+[getting the key and notebook from the desk]
+The blue key is a thing in the desk labeled 12. The description of the blue key is "A shiny blue key." The blue key unlocks the blue door.
+
+[setting up the reading command for the notebook]
+A thing has some text called printing. The printing of a thing is usually "blank".
+
+Understand the command "read" as something new. Understand "read [something]" as reading. Reading is an action applying to one thing. Check reading: if the printing of the noun is "blank", say "Nothing is written on [the noun]." instead. Carry out reading: say "You read: [printing of the noun][line break]". Report reading: do nothing.
+
+The tattered notebook is a thing in the desk labeled 12. Understand "notebook" as the tattered notebook. The printing of the notebook is " Most of what you see is illegible, but you make out a few notes as you read.
+'... these migraines are getting worse and worse… I’ve been feeling more faint as the days go by…'[line break]
+'... homework or Zork, hmmmm…'." The description of the notebook is "A tattered red notebook with drawings over it cover. It clearly belonged to a very bored student."
+
+[exiting the room]
+The blue door is a door. The blue door is north of the Classroom and south of the Greenhouse. The blue door is locked. The blue door is closed.
+
+
+[Greenhouse code]
+The description of the Greenhouse is "A surprisingly beautiful place. It feels open-air even if it isn't, and the plants make you feel at ease somehow."
+
+After going from the Classroom to the Greenhouse for the first time:
+	say "'What ... is this place? This is nothing like I expected, especially after those last two rooms. I feel like I'm getting whiplash here. So much green...'";
+	wait for any key;
+	say "[italic type]A real matryoshka doll we've found ourselves in, huh.[roman type]";
+	wait for any key;
+	say "[line break]'I mean, not like I'm complain-what did you say?'";
+	wait for any key;
+	say "[italic type]Don't worry about it man, we're chill. I'll explain after the announcement.[roman type]";
+	wait for any key;
+	say "[line break][bold type]Greetings once more. I see you've managed to make your way out of the fire and the frying pan,[roman type] the now familiar voice boomed over the intercom.";
+	wait for any key;
+	say "[italic type]Was the classroom really supposed to be a frying pan? Ya gotta be kidding me. That was plenty therapeutic![roman type]";
+	wait for any key;
+	say "[line break][bold type]Ah-ah-ah, my mistake. Right as always. THIS is the frying pan.[roman type]";
+	wait for any key;
+	say "[line break]'...'";
+	wait for any key;
+	say "[italic type]Mother- [roman type]";
+	wait for any key;
+	say "[line break]An inexplicable doggy door materializes near one corner of the room, and expecting the worst, you tense.[line break]Instead, a solitary b-[bracket]REDACTED[close bracket] files out. 'Uh, what?' You had recognized them for scarcely a second when the memory blinked out of your conscious thought. Reaching for it proved fruitless. There was some lingering dread that remained from your initial impression of them, but it seemed more due to the shock of them appearing than anything else. But before you could commit yourself entirely to that line of thought…";
+	wait for any key;
+	say "[line break][italic type]Shoot shoot shoot. Not good. Run! RUN![roman type]";
+	say "[line break]But it's too late. The tiny creature has somehow crept up to your hand in the short time span you were distracted and given you a sharp, quick, bite.";
+	wait for any key;
+	say "[line break][italic type]THAT IS NOT GOOD RIGHT THERE! Hold on, man ... No, no what am I saying? We need to search for the antidote! You're gonna die![roman type]";
+	say "[line break][italic type]GO! GO!!![roman type]";
+	increment venom;
+	
+	
+[greenhouse items]
+A collection of soil plots, a cabinet, and a row of colored switches are in the greenhouse.
+
+The collection of soil plots is a transparent container. Plot #1, Plot #2, Plot #3, Plot #4, Plot #5, and Plot #6 are in the collection of soil plots. The collection of soil plots is fixed in place.
+
+Plot #1 is a closed, openable, lockable, locked, and opaque container. It is fixed in place.
+Plot #2 is a closed, openable, lockable, locked, and opaque container. It is fixed in place.
+Plot #3 is a closed, openable, lockable, locked, and opaque container. It is fixed in place.
+Plot #4 is a closed, openable, lockable, locked, and opaque container. It is fixed in place.
+Plot #5 is a closed, openable, lockable, locked, and opaque container. It is fixed in place.
+Plot #6 is a closed, openable, lockable, locked, and opaque container. It is fixed in place.
+
+
+Secret Message #1 is a thing in Plot #1. The description is "It reads, 'Try digging Plot #6'".
+Secret Message #3 is a thing in Plot #5. The description is "It reads, 'Try digging Plot #1. Might as well, right? :)'".
+Secret Message #2 is a thing in Plot #6. The description is "It reads, 'Try digging Plot #5. I promise, no tricks after this.'"
+
+Venom Antidote is a thing in Plot #2. The description is "The label says it's the antidote to the black widow's neurotoxin. That sounds relevant."
+Helpful Hint is a thing in Plot #3. The description is "When you want to get out of here, O1Y0G1B1."
+Gold Key is a thing in Plot #4. The description is "A golden key. It unlocks something, but what?"
+
+Digging is an action applying to one thing. Understand "dig [something]" as digging.
+Check digging:
+	if the noun is Plot #1:
+		silently try unlocking Plot #1 with the shovel;
+		try opening Plot #1;
+	otherwise if the noun is Plot #2:
+		silently try unlocking Plot #2 with the shovel;
+		try opening Plot #2;
+	otherwise if the noun is Plot #3:
+		silently try unlocking Plot #3 with the shovel;
+		try opening Plot #3;
+	otherwise if the noun is Plot #4:
+		silently try unlocking Plot #4 with the shovel;
+		try opening Plot #4;
+	otherwise if the noun is Plot #5:
+		silently try unlocking Plot #5 with the shovel;
+		try opening Plot #5;
+	otherwise if the noun is Plot #6:
+		silently try unlocking Plot #6 with the shovel;
+		try opening Plot #6;
+	otherwise:
+		say "You can't dig here, obviously!".
+
+The cabinet is a closed, openable, lockable, locked, and opaque container. It is fixed in place.
+
+The gold key unlocks the cabinet.
+
+Mysterious Photo is a thing in the cabinet.
+
+pH is a number variable. pH is initially 0.
+Before examining photo once:
+	say "[italic type]...[roman type][line break]";
+	say "'Wow! This is just like real life, but smaller..? I feel like I know what this is, but the name's escaping me.'";
+	wait for any key;
+	say "[italic type]It's a picture. Ya know, sorta like a snapshot of the current world. You can preserve all sorts of memories with this kind of thing.[roman type][line break]";
+	wait for any key;
+	say "'It's two people ... I obviously don't recognize them, but it looks like two men, an elderly one and a younger one. They're shaking hands. What about you? Do you know who they are?'";
+	wait for any key;
+	say "[italic type]Yeah ... um, I mean, no, no, obviously not. N-never seen them before a day in my life. [roman type][line break]";
+	wait for any key;
+	say "'Haha, yeah, of course. Why [italic type]would[roman type] you know them? That would've been ridiculous!'";
+	wait for any key;
+	Now pH is 1.
+	
+
+After examining photo more than once:
+	say "Something the voice in your head calls a picture. You can see two people shaking hands: an elderly gentleman and a young man who appears to be in his late 20s."
+
+
+The row of colored switches is a transparent, open container. It is fixed in place. An orange switch, yellow switch, green switch, and blue switch are devices in the row. The orange switch, yellow switch, green switch, and blue switch are switched off. The orange switch, yellow switch, green switch, and blue switch are fixed in place.
+
+
+[exiting the room]
+The green door is a door. The green door is north of the Greenhouse and south of the Hospital. The green door is locked.
+
+[Hospital Code]
+[the finale scene]
+The hospital is a room. 
+
+After going to the Hospital for the first time:
+	say "[line break]As you make your way through the door, the first thing you notice is a beeping. *beep* ... *beep* ... *beep*";
+	wait for any key;
+	say "[line break]While complete overcome by exhaustion from your numerous trials, you find the energy to soak in your surroundings. You look around to see a very white room with not much space within it. You see numerous cabinets placed throughout, with a sink in the corner and a small, cylindrical metal trash can right next to it. To your left, you see creamy white curtains hanging from the ceiling, which is also where you notice the very pronounced noises are coming from.";
+	wait for any key;
+	say "[line break]*beep*... *beep* ... *beep*.";
+	wait for any key;
+	say "[italic type]I don't like this... I don't like this AT ALL.";
+	wait for any key;
+	say "[line break][bold type]'Ahhhh, here at last.' [roman type] You hear the voice of the man, who at this point feels like your arch-nemesis, coming from... behind the curtain? He no longer sounds like a remote voice but is here in person![line break][bold type]'I'm glad you survived the tests that I set in place for you. It would be a shame to have to make a fourth one.'[roman type]";
+	wait for any key;
+	say "[line break]A fourth one...?";
+	wait for any key;
+	say "[line break]You fall to knees as what feels like the most debilitatingly painful headache strikes. You close your eyes in pain, only to see random hallucinations of events that make no sense to you flash through your mind. You see yourself on the computer playing a text adventure game with a pile of Fountain Dew cans on your desk. This transitions to you sitting in a classroom, drawing random doodles on your notebook.";
+	wait for any key;
+	say "[line break]You muster the will to scream at the man ,'What[']s happening to me!?'";
+	wait for any key;
+	say "[line break]As you muster these words to him, he reveals himself from behind the curtain. He is an older man; wrinkled, skinny and short grey hairs on his head, probably in his 80s. He is dressed in a grey suit and a red tie, as if he's somebody important. [line break][bold type]'It seems the procedure is proceeding well, so our time together will be coming to an end.'";
+	wait for any key;
+	if pH is 1:
+		say "[line break]'Wait, you - you - you're! Th-Wh-How?'";
+		wait for any key;
+	say "[line break][bold type]'Take a look over here.' [roman type] He thrusts his arms outwards to move the curtain, revealing an unconscious, no older than 30 year old looking man laying on a hospital bed, hooked up to a large machine. *beep*... *beep*...*beep*";
+	wait for any key;
+	say "[line break][italic type]No...";
+	wait for any key;
+	say "[line break][bold type]'Seem familiar? Well, maybe it shouldn't for you, but it definitely should for somebody else. Surely he's spoken to you by now, the fellow in your head?'[line break][roman type]How could he possibly know about that?";
+	wait for any key;
+	say "[line break][bold type]'I'm sure you[']re wondering, how could I possibly know about that? Well, it[']s simple. I[']m the one that put him there.'[roman type]";
+	wait for any key;
+	say "[line break]Take a deep breath...";
+	wait for any key;
+	if pH is 1:
+		say "[line break]It seems insane, but he [italic type]is[roman type] familiar to you. The two men in front of you are the people you just saw in the photo from the greenhouse. Your mind reels.";
+		wait for any key;
+	say "[line break][bold type]I do apologize, I realize I have yet to introduce myself. Here, I go by Dr. Lambert, but you can call me father.[roman type]";
+	wait for any key;
+	say "[line break]You wince in pain. Not just because of the headache, but because of how cliche of a situation this just became.";
+	wait for any key;
+	say "[line break][bold type]Not biologically of course. In fact, you weren't born in any conventional sense. You see, Mr. Alex Levula here came to me seeking help for his condition. After conducting a few tests, I found that his condition, while terminal, also perfectly suited the pre-requisites for my research. While most know me as Dr. Lambert, the family doctor, not many know about my research that I've been conducting--brain transplants.[roman type]";
+	wait for any key;
+	say "[line break]As he speaks, more and more random memories pop into your head, which you now realize aren't yours. [italic type][line break]I remember now! That[']s why his voice sounded so familiar![roman type]"; 
+	wait for any key;
+	say "[line break][line break][bold type]'You, my precious subject, are the fourth iteration of artifical humans I[']ve developed to use as, well, essentially as a vehicle for the human brain. The problem is that the bodies I make are immature, so to aid in the maturation process, I made this place for you. Now that you're here, we can finalize the process. Alex[']s consciousness, the thing that makes him him, still exists in his body. Even though I transferred everything to the new body, he can[']t completely control it until his old one is gone. So, what are you waiting for?' Dr. Lambert points to a switch on the machine, as if to nudge you to press it.[roman type]";
+	wait for any key;
+	say "[line break]Realizing what it all means, you hesitate to make any moves. Before you make any moves, your arm spontaneously moves towards the switch. [line break][italic type]Sorry friend, but I know now that I have to do this. Thank you for going through that whole ordeal for me, but I[']ll be taking the wheel from here on out.[roman type]";
+	wait for any key;
+	say "[line break][line break][bold type]'Congratulations, Mr. Levula, on your new found freedom.' [roman type][line break]As you hear those final words, you press the switch, and everything goes black.";
+	wait for any key;
+	say "[line break]                  THE END";
+	wait for any key;
+	end the story saying "A big thanks from Josh and Sid to everybody who played this at any stage of development for your feedback. We hope you enjoyed this experience even a fraction as much as we enjoyed making it. This has been MEMORY LANE. See you on the flip side."
+	
+Release along with cover art, a website, the introductory booklet and the source text. Release along with an interpreter.
+	
+
+
+
